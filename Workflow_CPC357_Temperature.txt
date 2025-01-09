@@ -1,0 +1,15 @@
+import json
+sensor_data = parameter[1] # DHT11
+max_index = len(parameter[1])  
+latest_data = sensor_data[max_index-1]
+latest_sensor_data = latest_data["Temperature"]  # latest data for temperature 
+threshold = 27  # threshold for temperature
+if int(latest_sensor_data) <= threshold:
+    msgbody='<p>The current temperature '+latest_sensor_data+' is below threshold, the reading is less than '+str(threshold)+'.</p><br>'
+    output[1] = "Abnormal Reading Detected!"
+    output[2]=msgbody
+    output[3]=1
+else:
+    output[1] = ""
+    output[2] = ""
+    output[3] = ""
