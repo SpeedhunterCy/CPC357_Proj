@@ -1,0 +1,21 @@
+import json
+sensor_data1 = parameter[1]   # water level sensor
+sensor_data2 = parameter[2]   # rain sensor
+max_index1 = len(parameter[1])  # last index of water level data
+max_index2 = len(parameter[2])  # last index of rain data
+latest_data1 = sensor_data1[max_index1-1] # latest data from last index(water level)
+latest_data2 = sensor_data2[max_index2-1] # latest data from last index(rain)
+latest_sensor_data1 = latest_data1['Depth']  
+latest_sensor_data2 = latest_data2['Raining'] 
+threshold = 45  # threshold for water level
+raining = 1  # 1 means raining
+#check the condition, if both are true, send email
+if int(latest_sensor_data1) >= threshold and int(latest_sensor_data2) == raining:
+   msgbody='<p>It is raining now, the current water level '+latest_sensor_data1+' is above threshold, the reading is more than '+str(threshold)+'.</p><br>'
+   output[1] = "Flood alert!"
+   output[2]=msgbody
+   output[3]=1
+else:
+    output[1] = ""
+    output[2] = ""
+    output[3] = ""
